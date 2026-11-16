@@ -18,7 +18,7 @@ const roles = Array.from({ length: 6 }, () => role)
 
 function RoleCard() {
   return (
-    <Card className="min-h-[340px] gap-0 rounded-xl bg-[#151518] py-6 shadow-none ring-white/[0.06]">
+    <Card className="min-h-[300px] px-4 gap-0 rounded-xl bg-[#151518] py-6 shadow-none ring-white/[0.06]">
       <CardContent className="flex h-full flex-col gap-0 p-0">
         <h3 className="text-2xl font-medium tracking-tight text-white md:text-[28px]">
           {role.title}
@@ -52,9 +52,10 @@ function RoleCard() {
         </div>
 
         <Button
+          nativeButton={false}
           variant="ghost"
           render={<Link href="/jobs" />}
-          className="group mt-auto px-0 text-[15px] font-medium text-white hover:bg-transparent hover:text-white [&_svg]:transition-transform group-hover:[&_svg]:translate-x-0.5"
+          className="group mt-auto self-start px-0 text-sm font-medium text-white hover:bg-transparent hover:text-white [&_svg]:transition-transform group-hover:[&_svg]:translate-x-0.5"
         >
           Apply Now
           <ArrowRight data-icon="inline-end" />

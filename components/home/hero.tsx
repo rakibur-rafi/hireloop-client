@@ -163,7 +163,7 @@ export function Hero() {
             <Card
               key={stat.label}
               size="sm"
-              className="rounded-2xl px-4 border-0 bg-gradient-to-b from-[#010102] to-[#313131] py-5 shadow-none backdrop-blur-lg"
+              className="rounded-2xl px-4 border-0 bg-gradient-to-br from-[#010102] to-[#313131] py-5 shadow-none backdrop-blur-lg"
             >
               <CardContent className="min-h-[120px] gap-0 p-0 md:min-h-0">
                 <stat.icon

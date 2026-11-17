@@ -1,17 +1,6 @@
-export type JobFormData = {
-  jobTitle: string
-  companyName: string
-  jobCategory: string
-  jobType: string
-  remoteWorkAllowed: boolean
-  jobLocation: string
-  applicationDeadline: string
-  minSalary: string
-  maxSalary: string
-  salaryFrequency: string
-  responsibilities: string
-  qualifications: string
-}
+import type { JobFormData } from "@/lib/data/jobData"
+
+export type { JobFormData }
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
@@ -23,5 +12,23 @@ export const createJob = async (data: JobFormData) => {
     },
     body: JSON.stringify(data),
   })
-  return res.json()
+  return res
+}
+
+export const updateJob = async (id: string, data: JobFormData) => {
+  const res = await fetch(`${BASE_URL}/jobs/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  })
+  return res
+}
+
+export const deleteJob = async (id: string) => {
+  const res = await fetch(`${BASE_URL}/jobs/${id}`, {
+    method: 'DELETE',
+  })
+  return res
 }

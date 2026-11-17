@@ -1,11 +1,5 @@
-import React from 'react';
+import { ManageJobs } from "@/components/dashboard/manage-jobs";
 
-const ManageJobsPage = () => {
-    return (
-        <div>
-            manage
-        </div>
-    );
-};
-
-export default ManageJobsPage;
+export default function ManageJobsPage() {
+    return <ManageJobs />;
+}

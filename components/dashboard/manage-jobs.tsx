@@ -19,7 +19,7 @@ import {
 import Link from "next/link"
 import { useEffect, useState, type ComponentType } from "react"
 
-import { getJobs } from "@/lib/api/jobs"
+import {  getJobsByUser } from "@/lib/api/jobs"
 import { deleteJob } from "@/lib/actions/jobs"
 import { JobViewDialog } from "@/components/dashboard/job-view-dialog"
 import {
@@ -65,7 +65,7 @@ export function ManageJobs() {
   const [updateKey, setUpdateKey] = useState(0)
 
   function loadJobs() {
-    getJobs()
+    getJobsByUser()
       .then((data) => {
         setJobs(data)
         setIsLoading(false)

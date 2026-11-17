@@ -10,12 +10,14 @@ import {
   type JobFormState,
 } from "@/components/dashboard/job-form-fields"
 import { Button } from "@/components/ui/button"
+import { authClient } from "@/lib/auth-client"
 import { createJob } from "@/lib/actions/jobs"
 import type { JobFormData } from "@/lib/data/jobData"
 import { toast } from "../ui/toast"
 import { redirect } from "next/navigation"
 
 export function JobPostForm() {
+  const { data: session } = authClient.useSession()
   const [state, setState] = useState<JobFormState>({
     jobType: "Full-time",
     jobCategory: JOB_CATEGORIES[0],
@@ -42,6 +44,8 @@ export function JobPostForm() {
       responsibilities: String(formData.responsibilities ?? ""),
       qualifications: String(formData.qualifications ?? ""),
       status: state.status,
+      userName: session?.user.name ?? "",
+      userEmail: session?.user.email ?? "",
     }
 
     const result = await createJob(jobData)

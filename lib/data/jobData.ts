@@ -12,4 +12,6 @@ export type JobFormData = {
   responsibilities: string
   qualifications: string
   status: boolean
+  userName: string
+  userEmail: string
 }

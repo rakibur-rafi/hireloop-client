@@ -61,6 +61,9 @@ export function JobUpdateDialog({
       responsibilities: String(formData.responsibilities ?? ""),
       qualifications: String(formData.qualifications ?? ""),
       status: state.status,
+      // ownership never changes on edit — keep the original poster
+      userName: job.userName,
+      userEmail: job.userEmail,
     }
 
     const res = await updateJob(job._id, jobData)

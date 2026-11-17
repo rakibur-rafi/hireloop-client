@@ -13,7 +13,7 @@ import { authClient } from "@/lib/auth-client"
 import { toast } from "./ui/toast"
 
 const navLinks = [
-  { href: "/jobs", label: "Browse Jobs" },
+  { href: "/browse-jobs", label: "Browse Jobs" },
   { href: "/company", label: "Company" },
   { href: "/pricing", label: "Pricing" },
 ]

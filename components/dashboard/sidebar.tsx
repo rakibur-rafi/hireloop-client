@@ -52,7 +52,7 @@ const NAV_BY_ROLE: Record<Role, NavItem[]> = {
       icon: ClipboardList,
     },
     {
-      href: "/dashboard/recruiter/jobs/add-jobs",
+      href: "/dashboard/recruiter/jobs/new",
       label: "Add Jobs",
       icon: PlusCircle
     },

@@ -148,7 +148,7 @@ export function Navbar() {
             ) : user ? (
               <>
                 <Link
-                  href="/dashboard"
+                  href={`/dashboard/${role}`}
                   className="rounded-lg px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/5"
                   onClick={() => setOpen(false)}
                 >

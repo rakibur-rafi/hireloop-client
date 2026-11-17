@@ -2,7 +2,7 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 
@@ -21,12 +21,18 @@ const navLinks = [
 export function Navbar() {
   const [open, setOpen] = useState(false)
   const router = useRouter()
+  const pathname = usePathname()
   const {
     data: session,
     isPending,
   } = authClient.useSession()
 
+  if (pathname.startsWith("/dashboard")) {
+    return null
+  }
+
   const user = session?.user
+  const role= user?.role
   const displayName = user?.name?.trim() || user?.email || "Account"
 
   const handleSignOut = async () => {
@@ -76,7 +82,7 @@ export function Navbar() {
             ) : user ? (
               <>
                 <Link
-                  href="/dashboard"
+                  href={`/dashboard/${role}`}
                   className="max-w-[160px] truncate px-3 text-[13px] font-medium text-white transition-colors hover:text-brand"
                 >
                   {displayName}

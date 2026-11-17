@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
+import { useRouter } from "next/navigation"
+import { useEffect, useState, type FormEvent } from "react"
 
 import { AuthInput, PasswordInput } from "@/components/auth/auth-input"
 import { SocialButtons } from "@/components/auth/social-buttons"
@@ -8,18 +9,23 @@ import { validateEmail } from "@/components/auth/validation"
 import { Button } from "@/components/ui/button"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { authClient } from "@/lib/auth-client"
-import { toast } from "../ui/toast"
-import { redirect } from "next/navigation"
+import { toast } from "@/components/ui/toast"
 
 export function SignInForm() {
+  const router = useRouter()
   const {
       data: session,
       isPending,
     } = authClient.useSession()
-  
-  if(session) {
-    redirect("/")
-  }
+
+  // Signed-in users don't belong on the sign-in page
+  useEffect(() => {
+    if (!isPending && session) {
+      router.replace("/")
+    }
+  }, [isPending, session, router])
+
+  const [pending, setPending] = useState(false)
   const [email, setEmail] = useState("")
   const [emailTouched, setEmailTouched] = useState(false)
   const [emailError, setEmailError] = useState<string | null>(null)
@@ -53,15 +59,19 @@ export function SignInForm() {
       return
     }
 
+    setPending(true)
     const { data, error } = await authClient.signIn.email({
       ...userData,
     });
+    setPending(false)
      if(data) { 
       toast.add({
         title: "Signed in.",
         description: "You can now apply for jobs.",
         type: "success",
       })
+      
+      router.push("/")
     }
 
     if (error) {
@@ -115,12 +125,13 @@ export function SignInForm() {
 
         <Button
           type="submit"
+          disabled={pending}
           className="h-11 w-full rounded-lg bg-brand text-sm text-white hover:bg-brand-hover"
         >
-          Sign In
+          {pending ? "Signing in…" : "Sign In"}
         </Button>
 
-        <SocialButtons context="sign-in" />
+        <SocialButtons />
       </FieldGroup>
     </form>
   )
